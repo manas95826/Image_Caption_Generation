@@ -1,11 +1,8 @@
 
 # Image Caption Generation using Transformers and Streamlit
-```markdown
-
-Generate descriptive captions for images using the power of Transformers and its components: VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer, and deploy the app on Streamlit Cloud.
 
 ## Introduction
-
+```markdown
 Image captioning is the fascinating task of generating textual descriptions for images, enabling machines to understand and communicate the content of visual data. This project leverages the capabilities of the VisionEncoderDecoderModel, ViTFeatureExtractor, and AutoTokenizer from the Transformers library to automatically generate captions for images. The app is deployed on Streamlit Cloud for easy access and sharing.
 
 ## Prerequisites
