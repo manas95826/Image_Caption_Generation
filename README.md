@@ -45,7 +45,7 @@ Before you start, make sure you have the following prerequisites in place:
 
 ## Project Structure
 
-- `image_caption_app.py`: The main Streamlit application script. It employs Transformers to automatically create captions for uploaded images.
+- `app.py`: The main Streamlit application script. It employs Transformers to automatically create captions for uploaded images.
 - `requirements.txt`: Lists the necessary Python packages for the project.
 - `Procfile`: Specifies the command to run the Streamlit app on Streamlit Cloud.
 - `LICENSE`: This project is licensed under the MIT License.
@@ -62,7 +62,7 @@ Before you start, make sure you have the following prerequisites in place:
 This project is open-source and distributed under the MIT License. For more details, consult the [LICENSE](LICENSE) file.
 
 ## Contact
-
+```
 Feel free to reach out with questions, suggestions, or feedback by opening an issue in the [GitHub repository](https://github.com/manas95826/Image_Caption_Generation).
 ```
 
