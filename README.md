@@ -1,17 +1,12 @@
-Certainly! Here's an example of a README file for your Streamlit app, ready for copy-pasting:
 
-```markdown
 # Image Caption Generation using Transformers and Streamlit
+```markdown
 
 Generate descriptive captions for images using the power of Transformers and its components: VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer, and deploy the app on Streamlit Cloud.
 
 ## Introduction
 
 Image captioning is the fascinating task of generating textual descriptions for images, enabling machines to understand and communicate the content of visual data. This project leverages the capabilities of the VisionEncoderDecoderModel, ViTFeatureExtractor, and AutoTokenizer from the Transformers library to automatically generate captions for images. The app is deployed on Streamlit Cloud for easy access and sharing.
-
-## Demo
-
-Check out the live demo of the deployed app: [Image Captioning App](https://share.streamlit.io/your-username/your-app-repo/main/image_caption_app.py)
 
 ## Prerequisites
 
@@ -22,13 +17,13 @@ Before you start, make sure you have the following prerequisites in place:
   ```bash
   pip install streamlit transformers
   ```
-- Images you wish to caption in formats like jpg, jpeg, or png.
+- Images you wish to caption in formats like jpg, jpeg, png or webp.
 
 ## Usage
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/your-app-repo.git
+   git clone https://github.com/manas95826/Image_Caption_Generation.git
    cd your-app-repo
    ```
 
@@ -39,7 +34,7 @@ Before you start, make sure you have the following prerequisites in place:
 
 3. Run the Streamlit app locally:
    ```bash
-   streamlit run image_caption_app.py
+   streamlit run app.py
    ```
 
 4. To deploy on Streamlit Cloud, follow these steps:
@@ -50,7 +45,6 @@ Before you start, make sure you have the following prerequisites in place:
    - Configure environment variables, if needed.
    - Deploy the app on Streamlit Cloud.
 
-5. Access the deployed app by clicking on the Streamlit Cloud link in the "Demo" section above.
 
 ## Project Structure
 
@@ -72,7 +66,6 @@ This project is open-source and distributed under the MIT License. For more deta
 
 ## Contact
 
-Feel free to reach out with questions, suggestions, or feedback by opening an issue in the [GitHub repository](https://github.com/your-username/your-app-repo).
+Feel free to reach out with questions, suggestions, or feedback by opening an issue in the [GitHub repository](https://github.com/manas95826/Image_Caption_Generation).
 ```
 
-Remember to replace the placeholders (`your-username` and `your-app-repo`) with your actual GitHub username and app repository name. This README file provides a comprehensive guide to your project, including setup, usage, deployment, and acknowledgments.
