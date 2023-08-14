@@ -17,7 +17,7 @@ def main():
     st.title("Image Captioning App")
     st.write("Upload an image and get a caption!")
 
-    uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png","webp"])
+    uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png", "webp"])
 
     if uploaded_image is not None:
         st.image(uploaded_image, caption="Uploaded Image.", use_column_width=True)
@@ -38,4 +38,5 @@ def main():
         st.write(f"Caption: {caption}")
 
 if __name__ == "__main__":
+    st.set_option('deprecation.showfileUploaderEncoding', False)  # Disable file uploader encoding warning
     main()
