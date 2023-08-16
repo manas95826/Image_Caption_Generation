@@ -1,6 +1,8 @@
 import streamlit as st
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 from PIL import Image
+import sentencepiece
+
 
 # Load the model and tokenizer
 model = T5ForConditionalGeneration.from_pretrained("t5-small")
