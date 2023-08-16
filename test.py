@@ -3,7 +3,6 @@ from transformers import T5ForConditionalGeneration, T5Tokenizer
 from PIL import Image
 import sentencepiece
 
-
 # Load the model and tokenizer
 model = T5ForConditionalGeneration.from_pretrained("t5-small")
 tokenizer = T5Tokenizer.from_pretrained("t5-small")
@@ -30,9 +29,9 @@ def main():
             image = image.convert(mode="RGB")
 
         # Preprocess the image and generate caption
-        caption_prompt = f"Generate a caption for this image: {tokenizer.eos_token}"
-        inputs = tokenizer(caption_prompt, return_tensors="pt", padding="max_length", max_length=128, truncation=True)
-        input_ids = inputs.input_ids
+        caption_prompt = "Generate a caption for this image: "
+        input_text = caption_prompt + tokenizer.decode(tokenizer.encode(image, return_tensors="pt")[0])
+        input_ids = tokenizer(input_text, return_tensors="pt").input_ids
 
         output_ids = model.generate(input_ids, **gen_kwargs)
 
