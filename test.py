@@ -1,7 +1,6 @@
 import streamlit as st
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 from PIL import Image
-import sentencepiece
 import torch
 
 # Load the model and tokenizer
@@ -30,12 +29,10 @@ def main():
             image = image.convert(mode="RGB")
 
         # Preprocess the image and generate caption
-        image_tensor = torch.tensor([tokenizer.encode(image)])
-        caption_prompt = "Generate a caption for this image: "
-        input_text = caption_prompt + tokenizer.decode(image_tensor[0])
-        input_ids = tokenizer(input_text, return_tensors="pt").input_ids
+        image_tensor = torch.tensor(tokenizer.encode(image)).unsqueeze(0)
+        input_ids = model.prepare_inputs_for_generation(image_tensor)
 
-        output_ids = model.generate(input_ids, **gen_kwargs)
+        output_ids = model.generate(input_ids["input_ids"], **gen_kwargs)
 
         # Decode and display the caption
         caption = tokenizer.decode(output_ids[0], skip_special_tokens=True)
