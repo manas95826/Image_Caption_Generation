@@ -28,11 +28,11 @@ def main():
         if image.mode != "RGB":
             image = image.convert(mode="RGB")
 
-        # Preprocess the image
-        inputs = tokenizer(image, return_tensors="pt", padding=True, truncation=True)
-        input_ids = inputs.input_ids
+        # Convert image to bytes
+        image_bytes = image.tobytes()
 
         # Generate caption
+        input_ids = tokenizer(image_bytes, return_tensors="pt").input_ids
         with torch.no_grad():
             output_ids = model.generate(input_ids, **gen_kwargs)
 
