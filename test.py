@@ -28,11 +28,13 @@ def main():
         if image.mode != "RGB":
             image = image.convert(mode="RGB")
 
-        # Preprocess the image and generate caption
-        image_tensor = torch.tensor(tokenizer.encode(image)).unsqueeze(0)
-        input_ids = model.prepare_inputs_for_generation(image_tensor)
+        # Preprocess the image
+        inputs = tokenizer("Generate a caption for this image:", return_tensors="pt")
+        input_ids = inputs.input_ids
 
-        output_ids = model.generate(input_ids["input_ids"], **gen_kwargs)
+        # Generate caption
+        with torch.no_grad():
+            output_ids = model.generate(input_ids, **gen_kwargs)
 
         # Decode and display the caption
         caption = tokenizer.decode(output_ids[0], skip_special_tokens=True)
