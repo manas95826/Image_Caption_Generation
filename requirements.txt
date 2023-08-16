@@ -1,3 +1,5 @@
 streamlit
 transformers
 torch
+sentencepiece
+pillow
