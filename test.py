@@ -29,7 +29,7 @@ def main():
             image = image.convert(mode="RGB")
 
         # Preprocess the image
-        inputs = tokenizer("Generate a caption for this image:", return_tensors="pt")
+        inputs = tokenizer(image, return_tensors="pt", padding=True, truncation=True)
         input_ids = inputs.input_ids
 
         # Generate caption
