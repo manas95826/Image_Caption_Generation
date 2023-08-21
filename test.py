@@ -31,8 +31,9 @@ def main():
         # Convert image to bytes
         image_bytes = image.tobytes()
 
-        # Generate caption
-        input_ids = tokenizer(image_bytes, return_tensors="pt").input_ids
+        # Generate caption using a prompt
+        prompt = f"generate a caption for this image: {image_bytes}"
+        input_ids = tokenizer.encode(prompt, return_tensors="pt")
         with torch.no_grad():
             output_ids = model.generate(input_ids, **gen_kwargs)
 
