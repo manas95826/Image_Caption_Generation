@@ -4,7 +4,7 @@ from PIL import Image
 import torch
 import torchvision.transforms as transforms
 import numpy as np
-
+#1
 # Load the model and tokenizer
 model = T5ForConditionalGeneration.from_pretrained("t5-small")
 tokenizer = T5Tokenizer.from_pretrained("t5-small")
