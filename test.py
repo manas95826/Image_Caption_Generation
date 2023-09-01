@@ -1,18 +1,18 @@
 import streamlit as st
-from transformers import T5ForConditionalGeneration, T5Tokenizer
+from transformers import VisionEncoderDecoderModel, ViTFeatureExtractor, AutoTokenizer
 from PIL import Image
-import torch
-import torchvision.transforms as transforms
-import numpy as np
-#1
-# Load the model and tokenizer
-model = T5ForConditionalGeneration.from_pretrained("t5-small")
-tokenizer = T5Tokenizer.from_pretrained("t5-small")
+from gtts import gTTS
+from googletrans import Translator
+
+# Load the models and tokenizer
+model = VisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
+feature_extractor = ViTFeatureExtractor.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
+tokenizer = AutoTokenizer.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
 
 # Define generation parameters
 max_length = 20
-num_beams = 4
-gen_kwargs = {"max_length": max_length, "num_beams": num_beams, "no_repeat_ngram_size": 2}
+num_beams = 7
+gen_kwargs = {"max_length": max_length, "num_beams": num_beams}
 
 # Define the Streamlit app
 def main():
@@ -28,36 +28,27 @@ def main():
         # Preprocess the uploaded image
         image = Image.open(uploaded_image)
         if image.mode != "RGB":
-            image = image.convert("RGB")
+            image = image.convert(mode="RGB")
 
-        # Convert image to image embedding
-        image_embedding = get_image_embedding(image)
+        # Preprocess the image and generate caption
+        pixel_values = feature_extractor(images=[image], return_tensors="pt").pixel_values
+        output_ids = model.generate(pixel_values, **gen_kwargs)
 
-        # Generate caption using image embedding as input
-        prompt = f"generate a caption for this image:"
-        input_ids = tokenizer.encode(prompt, return_tensors="pt")
-        input_ids[0, -1] = image_embedding
-        with torch.no_grad():
-            output_ids = model.generate(input_ids, **gen_kwargs)
+        # Decode the caption
+        caption = tokenizer.batch_decode(output_ids, skip_special_tokens=True)
+        caption = caption[0].strip()
+        
+        # Translate the caption to Hindi
+        translator = Translator()
+        translated_caption = translator.translate(caption, src='en', dest='hi').text
 
-        # Decode and display the caption
-        caption = tokenizer.decode(output_ids[0], skip_special_tokens=True)
-        st.write(f"Caption: {caption}")
+        # Display the caption in English and its translation in Hindi
+        st.write(f"English Caption: {caption}")
+        st.write(f"Hindi Translation: {translated_caption}")
 
-def get_image_embedding(image):
-    # Resize and normalize the image
-    image_transform = transforms.Compose([
-        transforms.Resize((224, 224)),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ])
-    image = image_transform(image)
-    
-    # Convert image to a NumPy array and flatten it
-    image_np = np.array(image)
-    image_embedding = image_np.flatten()
-    
-    return image_embedding
+        # Convert the caption to speech and play it
+        tts = gTTS(translated_caption, lang='hi')
+        st.audio(tts.get_urls()[0], format='audio/wav')
 
 if __name__ == "__main__":
     st.set_option('deprecation.showfileUploaderEncoding', False)  # Disable file uploader encoding warning
