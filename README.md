@@ -1,9 +1,8 @@
 
 # Image Caption Generation using Transformers and Streamlit
-
-## Introduction
 Our cutting-edge project is at the intersection of visual and auditory intelligence. We have developed a state-of-the-art system that not only accurately captions images but also takes it a step further by seamlessly converting spoken language into Hindi speech. Our image captioning technology employs advanced neural networks to automatically generate descriptive and contextually relevant captions for images, enhancing accessibility and understanding. Additionally, our speech-to-Hindi-speech conversion capability leverages natural language processing and speech synthesis to enable seamless communication in Hindi, breaking language barriers and making information more accessible to a broader audience. Together, these two components represent a powerful synergy of computer vision and natural language processing, promising a transformative impact on communication, accessibility, and content localization.
 
+## Introduction
 ```markdown
 Image captioning is the fascinating task of generating textual descriptions for images, enabling machines to understand and communicate the content of visual data. This project leverages the capabilities of the VisionEncoderDecoderModel, ViTFeatureExtractor, and AutoTokenizer from the Transformers library to automatically generate captions for images. The app is deployed on Streamlit Cloud for easy access and sharing.
 
